@@ -5,10 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.transactions.models.Statistics;
@@ -28,9 +25,4 @@ public class StatisticsController {
 		return ResponseEntity.status(HttpStatus.OK).body(stats);
 	}
 
-	@PostMapping
-	@ResponseBody
-	ResponseEntity<Statistics> create(@RequestBody Statistics statistics) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(statistics);
-	}
 }
