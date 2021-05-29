@@ -1,5 +1,6 @@
 package com.challenge.transactions.models;
 
+import java.time.Duration;
 import java.time.Instant;
 
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +18,25 @@ public class Transaction {
 		super();
 		this.amount = amount;
 		this.timestamp = timestamp;
+	}
+
+	public Boolean isOlderThan60Seconds() {
+
+		Instant now = Instant.now();
+		Duration result = Duration.between(this.timestamp, now);
+		if (result.toSeconds() > 60)
+			return true;
+		return false;
+	}
+
+	public Boolean isAfterNow() {
+
+		Instant now = Instant.now();
+		Duration result = Duration.between(this.timestamp, now);
+		System.out.print(result.toSeconds());
+		if (result.isNegative())
+			return true;
+		return false;
 	}
 
 	public String getAmount() {
