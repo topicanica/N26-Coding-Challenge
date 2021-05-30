@@ -9,7 +9,6 @@ public class Statistics {
 
 	@NotNull
 	private BigDecimal sum;
-
 	@NotNull
 	private BigDecimal avg;
 	@NotNull
