@@ -11,10 +11,11 @@ public class Transaction {
 	@NotNull
 	@NotEmpty
 	private String amount;
-	// @NotNull
+
+	@NotNull
 	private Instant timestamp;
 
-	public Transaction(@NotNull @NotEmpty String amount, Instant timestamp) {
+	public Transaction(@NotNull @NotEmpty String amount, @NotNull Instant timestamp) {
 		super();
 		this.amount = amount;
 		this.timestamp = timestamp;
@@ -33,7 +34,6 @@ public class Transaction {
 
 		Instant now = Instant.now();
 		Duration result = Duration.between(this.timestamp, now);
-		System.out.print(result.toSeconds());
 		if (result.isNegative())
 			return true;
 		return false;
