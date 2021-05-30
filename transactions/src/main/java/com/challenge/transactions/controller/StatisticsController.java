@@ -16,13 +16,11 @@ public class StatisticsController {
 
 	@GetMapping
 	ResponseEntity<Statistics> get() {
-		Integer c = 10;
-		BigDecimal sum = new BigDecimal(Double.toString(1000.00));
-		BigDecimal avg = new BigDecimal(Double.toString(100.534));
-		BigDecimal max = new BigDecimal(Double.toString(200000.494));
-		BigDecimal min = new BigDecimal(Double.toString(50.233));
-		Statistics stats = new Statistics(sum, avg, max, min, c.longValue());
-		return ResponseEntity.status(HttpStatus.OK).body(stats);
+		Statistics statistics = new Statistics(new BigDecimal("1000.43"), new BigDecimal("100.53"),
+				new BigDecimal("200000.49"), new BigDecimal("50.23"), Long.valueOf(10));
+
+		return ResponseEntity.status(HttpStatus.OK).body(statistics);
+
 	}
 
 }

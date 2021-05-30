@@ -1,7 +1,5 @@
 package com.challenge.transactions.controller;
 
-import java.math.BigDecimal;
-
 import org.springframework.boot.json.JsonParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +18,12 @@ public class TransactionsController {
 	@PostMapping
 	ResponseEntity<Transaction> create(@RequestBody Transaction transaction) {
 
-		if (transaction.isOlderThan60Seconds())
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		else if (transaction.isAfterNow())
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
 		try {
-			new BigDecimal(transaction.getAmount());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-		}
-		try {
+			if (transaction.isOlderThan60Seconds()) {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+			} else if (transaction.isAfterNow() || !(transaction.isParsable())) {
+				return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+			}
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (JsonParseException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

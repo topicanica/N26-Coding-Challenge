@@ -1,5 +1,6 @@
 package com.challenge.transactions.models;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -37,6 +38,15 @@ public class Transaction {
 		if (result.isNegative())
 			return true;
 		return false;
+	}
+
+	public Boolean isParsable() {
+		try {
+			new BigDecimal(this.getAmount());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public String getAmount() {

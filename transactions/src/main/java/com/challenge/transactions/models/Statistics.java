@@ -1,7 +1,7 @@
 package com.challenge.transactions.models;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import javax.validation.constraints.NotNull;
 
@@ -28,8 +28,10 @@ public class Statistics {
 		this.count = count;
 	}
 
+	@SuppressWarnings("deprecation")
 	private static BigDecimal round(BigDecimal value) {
-		value = value.setScale(2, RoundingMode.HALF_UP);
+		value = value.setScale(2, BigDecimal.ROUND_HALF_UP);
+		new DecimalFormat("#.00").format(value);
 		return value;
 	}
 
