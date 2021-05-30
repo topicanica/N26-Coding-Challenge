@@ -17,14 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.anarsoft.vmlens.concurrent.junit.ConcurrentTestRunner;
 import com.challenge.transactions.models.Transaction;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-@RunWith(SpringRunner.class)
+@RunWith(ConcurrentTestRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class TransactionsControllerTest {
@@ -53,7 +53,7 @@ class TransactionsControllerTest {
 	}
 
 	@Test
-	public void postRequest_InternalServerError_IfAmountIsNull() {
+	public void testValidationIfAmountIsNull() {
 		// given
 		Instant timestamp = Instant.now();
 		Transaction transactionToPost = new Transaction(null, timestamp);
@@ -63,7 +63,7 @@ class TransactionsControllerTest {
 	}
 
 	@Test
-	public void postRequest_InternalServerError_IfTimestampIsNull() {
+	public void testValidationIfTimestampIsNull() {
 		// given
 		Instant timestamp = Instant.now();
 		Transaction transactionToPost = new Transaction("12.3343", null);
@@ -73,7 +73,7 @@ class TransactionsControllerTest {
 	}
 
 	@Test
-	public void postRequest_InternalServerError_IfAmountIsEmpty() {
+	public void testValidationIfAmountIsEmpty() {
 		// given
 		Instant timestamp = Instant.now();
 		Transaction transactionToPost = new Transaction("", timestamp);
