@@ -16,29 +16,24 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.anarsoft.vmlens.concurrent.junit.ConcurrentTestRunner;
 import com.challenge.transactions.helpers.FormatHelpers;
 import com.challenge.transactions.models.Transaction;
-import com.challenge.transactions.repositories.TransactionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(ConcurrentTestRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class TransactionsControllerTest {
-
 	@Autowired
 	Validator validator;
 	@Autowired
 	private MockMvc mockMvc;
 	@Autowired
 	ObjectMapper objectMapper;
-	@MockBean
-	private TransactionRepository transactionService;
 
 	@Test
 	void postTransactions_IsCreated_IfSuccess() throws Exception {

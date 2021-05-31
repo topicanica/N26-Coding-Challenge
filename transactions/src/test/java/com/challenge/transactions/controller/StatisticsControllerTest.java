@@ -1,6 +1,7 @@
 package com.challenge.transactions.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,7 +22,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.anarsoft.vmlens.concurrent.junit.ConcurrentTestRunner;
 import com.challenge.transactions.helpers.FormatHelpers;
 import com.challenge.transactions.models.Statistics;
-import com.challenge.transactions.repositories.TransactionRepository;
+import com.challenge.transactions.services.StatisticsService;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @RunWith(ConcurrentTestRunner.class)
@@ -34,13 +35,13 @@ class StatisticsControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private TransactionRepository transactionService;
+	private StatisticsService statisticsService;
 
 	@Test
 	void getStatistics_IsAsserted_IfSuccess() throws Exception {
 		Statistics statistics = new Statistics(new BigDecimal("33.67"), new BigDecimal("16.83"),
 				new BigDecimal("15.33"), new BigDecimal("18.33"), Long.valueOf(2));
-
+		doReturn(statistics).when(statisticsService).calculateStatistics();
 		MvcResult result = mockMvc.perform(get("/statistics").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andReturn();
 		String content = result.getResponse().getContentAsString();
