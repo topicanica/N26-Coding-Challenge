@@ -1,25 +1,17 @@
 package com.challenge.transactions.models;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
-import javax.validation.constraints.NotNull;
+import com.challenge.transactions.helpers.FormatHelpers;
 
 public class Statistics {
-
-	@NotNull
 	private BigDecimal sum;
-	@NotNull
 	private BigDecimal avg;
-	@NotNull
 	private BigDecimal max;
-	@NotNull
 	private BigDecimal min;
-	@NotNull
 	private Long count;
 
-	public Statistics(@NotNull BigDecimal sum, @NotNull BigDecimal avg, @NotNull BigDecimal max,
-			@NotNull BigDecimal min, @NotNull Long count) {
+	public Statistics(BigDecimal sum, BigDecimal avg, BigDecimal max, BigDecimal min, Long count) {
 		super();
 		this.sum = sum;
 		this.avg = avg;
@@ -28,48 +20,44 @@ public class Statistics {
 		this.count = count;
 	}
 
-	@SuppressWarnings("deprecation")
-	private static BigDecimal round(BigDecimal value) {
-		value = value.setScale(2, BigDecimal.ROUND_HALF_UP);
-		new DecimalFormat("#.00").format(value);
-		return value;
+	public Statistics() {
+		super();
 	}
 
 	public BigDecimal getSum() {
-		return round(sum);
+		return this.sum;
 	}
 
 	public void setSum(BigDecimal sum) {
-		this.sum = round(sum);
+		this.sum = FormatHelpers.formatBigDecimal(sum);
 	}
 
 	public BigDecimal getAvg() {
-
-		return round(avg);
+		return this.avg;
 	}
 
 	public void setAvg(BigDecimal avg) {
-		this.avg = round(avg);
+		this.avg = FormatHelpers.formatBigDecimal(avg);
 	}
 
 	public BigDecimal getMax() {
-		return round(max);
+		return this.max;
 	}
 
 	public void setMax(BigDecimal max) {
-		this.max = round(max);
+		this.max = FormatHelpers.formatBigDecimal(max);
 	}
 
 	public BigDecimal getMin() {
-		return round(min);
+		return this.min;
 	}
 
 	public void setMin(BigDecimal min) {
-		this.min = round(min);
+		this.min = FormatHelpers.formatBigDecimal(min);
 	}
 
 	public Long getCount() {
-		return count;
+		return this.count;
 	}
 
 	public void setCount(Long count) {

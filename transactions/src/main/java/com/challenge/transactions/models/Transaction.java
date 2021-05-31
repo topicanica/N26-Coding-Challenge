@@ -8,11 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class Transaction {
-
 	@NotNull
 	@NotEmpty
 	private String amount;
-
 	@NotNull
 	private Instant timestamp;
 
@@ -23,7 +21,6 @@ public class Transaction {
 	}
 
 	public Boolean isOlderThan60Seconds() {
-
 		Instant now = Instant.now();
 		Duration result = Duration.between(this.timestamp, now);
 		if (result.toSeconds() > 60)
@@ -32,7 +29,6 @@ public class Transaction {
 	}
 
 	public Boolean isAfterNow() {
-
 		Instant now = Instant.now();
 		Duration result = Duration.between(this.timestamp, now);
 		if (result.isNegative())
