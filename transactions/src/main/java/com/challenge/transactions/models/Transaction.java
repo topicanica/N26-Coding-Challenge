@@ -20,6 +20,9 @@ public class Transaction {
 		this.timestamp = timestamp;
 	}
 
+	public Transaction() {
+	}
+
 	public Boolean isOlderThan60Seconds() {
 		Instant now = Instant.now();
 		Duration result = Duration.between(this.timestamp, now);

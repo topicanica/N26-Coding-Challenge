@@ -17,9 +17,11 @@ public class TransactionRepository {
 	public List<Transaction> findAllTransactionsYoungerThan60SecondsFromNow() {
 		List<Transaction> toReturn = new ArrayList<Transaction>();
 
-		for (Transaction transaction : dataSource.transactions) {
-			if (!(transaction.isAfterNow()) && !(transaction.isOlderThan60Seconds())) {
-				toReturn.add(transaction);
+		if (!dataSource.transactions.isEmpty()) {
+			for (Transaction transaction : dataSource.transactions) {
+				if (!(transaction.isAfterNow()) && !(transaction.isOlderThan60Seconds())) {
+					toReturn.add(transaction);
+				}
 			}
 		}
 		return toReturn;
