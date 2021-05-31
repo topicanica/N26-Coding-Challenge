@@ -9,5 +9,4 @@ class TransactionsApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
